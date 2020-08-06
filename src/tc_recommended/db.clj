@@ -22,33 +22,24 @@
   [query]
   (jdbc/query db-conn (sql/format query)))
 
-(defn all-composers
-  []
-  (make-query {:select [:id :name]
-               :from   [:composers]}))
-
-(defn all-work-types
+(defn get-all-work-types
   []
   (make-query {:select [:id :name]
                :from   [:work_type]}))
 
-(defn works-by-type
-  [type-id]
-  (make-query {:select   [[:c.id :composer_id] [:c.name :composer_name] [:w.name :work_name] :w.position]
+(defn get-all-works
+  []
+  (make-query {:select   [[:c.id :composer_id]
+                          [:c.name :composer_name]
+                          [:w.name :work_name]
+                          [:wt.id :work_type_id]
+                          [:wt.name :work_type_name]
+                          :position]
                :from     [[:works :w]]
-               :join     [[:composers :c] [:= :w.composer_id :c.id]]
-               :where    [:= :w.type_id type-id]
-               :order-by [:w.position]}))
-
-(defn works-by-composer
-  [composer-id]
-  (make-query {:select   [[:c.id :composer_id] [:c.name :composer_name] [:w.name :work_name] :position]
-               :from     [[:works :w]]
-               :join     [[:composers :c] [:= :w.composer_id :c.id]]
-               :where    [:= :w.composer_id composer-id]
+               :join     [[:composers :c] [:= :w.composer_id :c.id] [:work_type :wt] [:= :w.type_id :wt.id]]
                :order-by [:w.type_id :w.position]}))
 
-(defn composers-rating
+(defn get-composers-rating
   []
   (jdbc/query db-conn "SELECT c.id,
                               c.name,
@@ -57,3 +48,7 @@
                        JOIN works w ON w.composer_id = c.id
                        GROUP BY c.name
                        ORDER BY rating DESC"))
+
+(defstate composers-rating :start (get-composers-rating))
+(defstate all-work-types :start (get-all-work-types))
+(defstate all-works :start (get-all-works))
