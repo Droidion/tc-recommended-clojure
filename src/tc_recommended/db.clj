@@ -4,24 +4,17 @@
             [clojure.java.jdbc :as jdbc]
             [mount.core :refer [defstate]]))
 
+;; Connection string
 (def datasource-options {:jdbc-url "jdbc:sqlite:resources/tc-recommended.sqlite"})
 
-;; Create HikariCP connection pool
-(defonce datasource
-         (delay (cp/make-datasource datasource-options)))
+;; HikariCP connection pool in state
+(defonce datasource (delay (cp/make-datasource datasource-options)))
+(defstate db-conn :start {:datasource @datasource})
 
-(defn- get-conn
-  "Returns db connection as connection pool"
-  []
-  {:datasource @datasource})
+;; Shortcut for DB query
+(defn- make-query [query] (jdbc/query db-conn (sql/format query)))
 
-;; db connection in state
-(defstate db-conn :start (get-conn))
-
-(defn make-query
-  [query]
-  (jdbc/query db-conn (sql/format query)))
-
+;; SQL Requests
 (defn get-all-work-types
   []
   (make-query {:select [:id :name]
@@ -49,6 +42,7 @@
                        GROUP BY c.name
                        ORDER BY rating DESC"))
 
+;; Cache
 (defstate composers-rating :start (get-composers-rating))
 (defstate all-work-types :start (get-all-work-types))
 (defstate all-works :start (get-all-works))

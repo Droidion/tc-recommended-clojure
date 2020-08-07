@@ -10,6 +10,9 @@
                  ;; Web server
                  [ring/ring-core "1.8.1"]
                  [ring/ring-jetty-adapter "1.8.1"]
+                 [metosin/reitit-malli "0.5.5"]
+                 [metosin/muuntaja "0.6.7"]
+                 [metosin/reitit-middleware "0.5.5"]
                  ;; Routing
                  [metosin/reitit-core "0.5.5"]
                  [metosin/reitit-ring "0.5.5"]
