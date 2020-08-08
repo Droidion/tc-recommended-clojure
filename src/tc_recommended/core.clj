@@ -2,6 +2,7 @@
   (:require [mount.core :as mount]
             [ring.adapter.jetty :refer [run-jetty]]
             [reitit.ring :as r]
+            [tc-recommended.styles :as styles]
             [tc-recommended.routes :as routes]
             [tc-recommended.db])
   (:gen-class))
@@ -17,6 +18,7 @@
 
 (defn- start-server
   []
+  (styles/compile-styles)
   (mount/start)
   (let [handler (run-jetty (r/ring-handler
                              routes/routes

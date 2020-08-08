@@ -14,22 +14,24 @@
     [[""
       ["/" {:get {:handler handlers/top-composers}}]
       ["/top-composers" {:get {:handler handlers/top-composers}}]
-      ["/genre/{work-genre-id}" {:get {:handler handlers/works-by-genre}}]
-      ["/composer/{composer-id}" {:get {:handler handlers/composer}}]
+      ["/genre/:work-genre-id" {:get {:handler    handlers/works-by-genre
+                                      :parameters {:path [:map [:work-genre-id int?]]}}}]
+      ["/composer/:composer-id" {:get {:handler    handlers/composer
+                                       :parameters {:path [:map [:composer-id int?]]}}}]
       ["/credits" {:get {:handler handlers/credits}}]
       ["/assets/*" (r/create-resource-handler)]]]
     {:data {:coercion   (reitit.coercion.malli/create
                           {;; set of keys to include in error messages
-                           :error-keys #{#_:type :coercion :in :schema :value :errors :humanized #_:transformed}
+                           :error-keys       #{#_:type :coercion :in :schema :value :errors :humanized #_:transformed}
                            ;; schema identity function (default: close all map schemas)
-                           :compile mu/closed-schema
+                           :compile          mu/closed-schema
                            ;; strip-extra-keys (effects only predefined transformers)
                            :strip-extra-keys true
                            ;; add/set default values
-                           :default-values true
+                           :default-values   true
                            ;; malli options
-                           :options nil})
-            :muuntaja m/instance
+                           :options          nil})
+            :muuntaja   m/instance
             :middleware [;; query-params & form-params
                          parameters/parameters-middleware
                          ;; content-negotiation
