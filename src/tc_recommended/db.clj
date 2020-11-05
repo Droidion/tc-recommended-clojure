@@ -17,7 +17,7 @@
 ;; SQL Requests
 (defn get-all-work-types
   []
-  (make-query {:select [:id :name]
+  (make-query {:select [:id :name :slug]
                :from   [:work_type]}))
 
 (defn get-all-works

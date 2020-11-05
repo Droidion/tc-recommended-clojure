@@ -30,38 +30,37 @@
 
 
 (defn get-menu
-  []
-  (for [genre all-work-types]
-    [:div
-     [:a {:href (str "/genre/" (:id genre))} (:name genre)]]))
+  [title]
+  (let [work-types (->> all-work-types
+                        (cons {:name "Credits" :url "credits"})
+                        (cons {:name "Top composers" :url "top-composers"}))]
+    (for [genre work-types]
+      [:div
+       (if (= title (:name genre))
+         [:span (:name genre)]
+         (if (contains? genre :slug)
+           [:a {:href (str "/genre/" (:slug genre))} (:name genre)]
+           [:a {:href (str "/" (:url genre))} (:name genre)]))])))
 
 (defn application [title description content]
-  (html5 [:head
-          [:title title]
-          [:link {:rel "apple-touch-icon" :sizes "180x180" :href "assets/apple-touch-icon.png"}]
-          [:link {:rel "icon" :type "image/png" :sizes "32x32" :href "assets/favicon-32x32.png"}]
-          [:link {:rel "icon" :type "image/png" :sizes "16x16" :href "assets/favicon-16x16.png"}]
-          [:link {:rel "manifest" :href "assets/site.webmanifest"}]
-          [:link {:rel "mask-icon" :href "assets/safari-pinned-tab.svg" :color "#3b4252"}]
-          [:link {:rel "preconnect" :href "https://fonts.gstatic.com/" :crossorigin "true"}]
-          [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
-          [:meta {:name "robots" :content "index, follow"}]
-          [:meta {:name "msapplication-TileColor" :content "#2b5797"}]
-          [:meta {:name "theme-color" :content "#ffffff"}]
-          [:meta {:name "description" :content description}]
-          ;; (include-css "assets/reset.css")
-          (include-css "https://fonts.googleapis.com/css2?family=Raleway&family=Roboto:wght@300;400&display=swap")
-          (include-css "assets/styles.css")
-          [:body
-           header
-           [:div.wrapper
-            [:aside
-             [:div.menu
-              [:div
-               [:a {:href "/credits"} "Credits"]]
-              [:div
-               [:a {:href "/top-composers"} "Top composers"]]
-              (get-menu)]]
-            [:div.content content]]
-           footer]]))
+  (html5 {:lang "en"} [:head
+                       [:title title]
+                       [:link {:rel "apple-touch-icon" :sizes "180x180" :href "/assets/apple-touch-icon.png"}]
+                       [:link {:rel "icon" :type "image/png" :sizes "32x32" :href "/assets/favicon-32x32.png"}]
+                       [:link {:rel "icon" :type "image/png" :sizes "16x16" :href "/assets/favicon-16x16.png"}]
+                       [:link {:rel "manifest" :href "/assets/site.webmanifest"}]
+                       [:link {:rel "mask-icon" :href "/assets/safari-pinned-tab.svg" :color "#3b4252"}]
+                       [:link {:rel "preconnect" :href "https://fonts.gstatic.com/" :crossorigin "true"}]
+                       [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+                       [:meta {:name "robots" :content "index, follow"}]
+                       [:meta {:name "msapplication-TileColor" :content "#2b5797"}]
+                       [:meta {:name "theme-color" :content "#ffffff"}]
+                       [:meta {:name "description" :content description}]
+                       ;; (include-css "assets/reset.css")
+                       (include-css "https://fonts.googleapis.com/css2?family=Raleway&family=Roboto:wght@300;400&display=swap")
+                       (include-css "/assets/styles.css")
+                       [:body
+                        header
+                        [:div.wrapper content]
+                        footer]]))
 

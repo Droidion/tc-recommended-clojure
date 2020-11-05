@@ -1,6 +1,6 @@
 (ns tc-recommended.handlers
   (:require [tc-recommended.templates.pages :as pages]
-            [tc-recommended.db :refer [composers-rating]]))
+            [tc-recommended.db :refer [composers-rating all-works all-work-types]]))
 
 (def http-header {"Content-Type" "text/html; charset=UTF-8"})
 
@@ -16,8 +16,10 @@
 
 (defn works-by-genre
   [{path-params :path-params}]
-  (let [genre-id (get path-params :work-genre-id)])
-  (good-html (str "works by genre id " (get path-params :work-genre-id))))
+  (let [slug (:slug path-params)
+        genre (first (filter #(= (:slug %) slug) all-work-types))
+        works (filter #(= (:work_type_id %) (:id genre)) all-works)]
+    (good-html (pages/works-by-genre works (:name genre)))))
 
 (defn composer
   [{path-params :path-params}]
