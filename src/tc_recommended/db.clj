@@ -20,6 +20,11 @@
   (make-query {:select [:id :name :slug]
                :from   [:work_type]}))
 
+(defn get-all-composers
+  []
+  (make-query {:select [:id :name]
+               :from   [:composers]}))
+
 (defn get-all-works
   []
   (make-query {:select   [[:c.id :composer_id]
@@ -42,7 +47,12 @@
                        GROUP BY c.name
                        ORDER BY rating DESC"))
 
+(defn get-work-type-name-by-id
+  [work-types id]
+  (:name (first (filter #(= (:id %) id) work-types))))
+
 ;; Cache
 (defstate composers-rating :start (get-composers-rating))
 (defstate all-work-types :start (get-all-work-types))
 (defstate all-works :start (get-all-works))
+(defstate all-composers :start (get-all-composers))

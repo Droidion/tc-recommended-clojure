@@ -1,6 +1,6 @@
 (ns tc-recommended.handlers
   (:require [tc-recommended.templates.pages :as pages]
-            [tc-recommended.db :refer [composers-rating all-works all-work-types]]))
+            [tc-recommended.db :refer [composers-rating all-works all-work-types all-composers]]))
 
 (def http-header {"Content-Type" "text/html; charset=UTF-8"})
 
@@ -14,6 +14,9 @@
   [_]
   (good-html (pages/best-composers composers-rating)))
 
+(defn group-by-genre-name [works]
+  (reduce (fn [acc el] (assoc acc (:work_type_name el) (conj (get acc (:work_type_name el)) el))) {} works))
+
 (defn works-by-genre
   [{path-params :path-params}]
   (let [slug (:slug path-params)
@@ -23,7 +26,12 @@
 
 (defn composer
   [{path-params :path-params}]
-  (good-html (str "works by composer id " (get path-params :composer-id))))
+  (let [composer-id (Integer/parseInt (get path-params :composer-id))
+        composer (first (filter #(= (:id %) composer-id) all-composers))
+        works (filter #(= (:composer_id %) composer-id) all-works)
+        works-grouped-by-genre-name (group-by-genre-name works)]
+    (println works-grouped-by-genre-name)
+    (good-html (pages/works-by-composer works-grouped-by-genre-name composer))))
 
 (defn credits
   [_]
