@@ -11,7 +11,7 @@ An exercise in making traditional website using Clojure for everything, includin
 
 SQLite is used for data storage.
 
-See live: https://tclist.dev
+See live: https://tclist.best
 
 ## How to run
 
