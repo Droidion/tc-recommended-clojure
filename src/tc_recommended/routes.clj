@@ -15,7 +15,7 @@
       ["/" {:get {:handler handlers/top-composers}}]
       ["/top-composers" {:get {:handler handlers/top-composers}}]
       ["/genre/:slug" {:get {:handler    handlers/works-by-genre
-                                      :parameters {:path [:map [:slug string?]]}}}]
+                             :parameters {:path [:map [:slug string?]]}}}]
       ["/composer/:composer-id" {:get {:handler    handlers/composer
                                        :parameters {:path [:map [:composer-id int?]]}}}]
       ["/credits" {:get {:handler handlers/credits}}]

@@ -65,10 +65,10 @@
                          :width  global-desktop-width}])])
 
 (def header
-  [[:header {:border-radius   "0.6rem 0.6rem 0 0"
-             :margin     "0 auto 1rem auto"
-             :text-align "center"
-             :width      "100%"}
+  [[:header {:border-radius "0.6rem 0.6rem 0 0"
+             :margin        "0 auto 1rem auto"
+             :text-align    "center"
+             :width         "100%"}
     [:.title {:font-family "'Raleway', sans-serif"
               :font-size   "1.8rem"
               :padding     "1rem 0 .4rem 0"}]
