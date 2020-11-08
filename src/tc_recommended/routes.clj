@@ -1,3 +1,4 @@
+;; Reitit router configuration
 (ns tc-recommended.routes
   (:require [reitit.ring :as r]
             [reitit.coercion.malli]
@@ -9,6 +10,7 @@
             [muuntaja.core :as m]
             [tc-recommended.handlers :as handlers]))
 
+;; Router configuration
 (def routes
   (r/router
     [[""
