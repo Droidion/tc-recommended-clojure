@@ -12,9 +12,14 @@
 (defonce datasource (delay (cp/make-datasource datasource-options)))
 (defstate db-conn :start {:datasource @datasource})
 
+(defn get-composers-rating "Returns composers rating from DB" [] (jdbc/query db-conn req/composers-rating))
+(defn get-all-work-types "Returns genres from DB" [] (jdbc/query db-conn req/all-work-types))
+(defn get-all-works "Returns all works from DB" [] (jdbc/query db-conn req/all-works))
+(defn get-all-composers "Returns all composers from DB" [] (jdbc/query db-conn req/all-composers))
+
 ;; Make requests to database and cache results
 ;; When the app starts, we makes the queries and then just use the cache
-(defstate composers-rating :start (jdbc/query db-conn req/composers-rating))
-(defstate all-work-types :start (jdbc/query db-conn req/all-work-types))
-(defstate all-works :start (jdbc/query db-conn req/all-works))
-(defstate all-composers :start (jdbc/query db-conn req/all-composers))
+(defstate composers-rating :start (get-composers-rating))
+(defstate all-work-types :start (get-all-work-types))
+(defstate all-works :start (get-all-works))
+(defstate all-composers :start (get-all-composers))
