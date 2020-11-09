@@ -1,3 +1,7 @@
+![Clojure CI](https://github.com/Droidion/tc-recommended-clojure/workflows/Clojure%20CI/badge.svg)
+![Github Issues](https://img.shields.io/github/issues/Droidion/tc-recommended-clojure)
+![License](https://img.shields.io/github/license/Droidion/tc-recommended-clojure)
+
 # Lists of classical music works
 
 ![Screenshot of the site](doc/screenshot.png)
