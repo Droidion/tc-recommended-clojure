@@ -5,3 +5,10 @@ services:
     build: .
     ports:
       - '7888:7888'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tc-recommended-clojure.entrypoints=https"
+      - "traefik.http.routers.tc-recommended-clojure.rule=Host(`tclist.best`)"
+      - "traefik.http.routers.tc-recommended-clojure.tls=true"
+      - "traefik.http.routers.tc-recommended-clojure.tls.certresolver=letsEncrypt"
+      - "traefik.http.services.tc-recommended-clojure-service.loadbalancer.server.port=7888"
