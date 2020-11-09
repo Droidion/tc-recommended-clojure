@@ -24,4 +24,5 @@
                  ;; Templating
                  [hiccup "1.0.5"]
                  [garden "1.3.10"]]
-  :repl-options {:init-ns tc-recommended.core})
+  :repl-options {:init-ns tc-recommended.core}
+  :profiles {:dev {:dependencies [[org.clojure/test.check "1.1.0"]]}})
