@@ -1,6 +1,6 @@
-(ns tc-recommended-clojure.core-test
+(ns tc-recommended.core-test
   (:require [clojure.test :refer :all]
-            [tc-recommended-clojure.core :refer :all]))
+            [tc-recommended.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."

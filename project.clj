@@ -1,4 +1,4 @@
-(defproject tc-recommended-clojure "0.1.0-SNAPSHOT"
+(defproject tc-recommended "0.1.0-SNAPSHOT"
   :description "Talkclassical recommended works and composers"
   :url "http://example.com/FIXME"
   :main tc-recommended.core
