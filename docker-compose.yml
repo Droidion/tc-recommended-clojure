@@ -1,6 +1,7 @@
 version: '3'
 services:
   tc-recommended-clojure:
+    container_name: tc-recommended-clojure
     build: .
     ports:
       - '7888:7888'
