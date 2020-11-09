@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/tc-recommended-clojure.iml" filepath="$PROJECT_DIR$/tc-recommended-clojure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tc-recommended.iml" filepath="$PROJECT_DIR$/tc-recommended.iml" />
     </modules>
   </component>
 </project>
