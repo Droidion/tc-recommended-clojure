@@ -72,5 +72,5 @@
                        [:meta {:name "description" :content description}]
                        (include-css "https://fonts.googleapis.com/css2?family=Raleway&family=Roboto:wght@300;400&display=swap")
                        (include-css "/assets/styles.css")
-                       [:script {:async "async" :defer "defer" :data-website-id "85f2859c-fbda-4213-a9fe-f02579a4a7fe" :src "https://zunh.dev/umami.js"}]]
+                       [:script {:async "async" :defer "defer" :data-website-id "85f2859c-fbda-4213-a9fe-f02579a4a7fe" :src "https://umami.zunh.dev/umami.js"}]]
          [:body header [:div.wrapper content] footer]))
