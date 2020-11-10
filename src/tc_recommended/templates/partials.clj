@@ -30,7 +30,7 @@
     " forum members."]
    [:div.icons
     [:div [:a {:href "https://clojure.org"} clojure-icon]]
-    [:div [:a {:href "https://github.com/Droidion/tc-recommended-rust"} github-icon]]]])
+    [:div [:a {:href "https://github.com/Droidion/tc-recommended-clojure"} github-icon]]]])
 
 ;; Menu
 (defn menu
