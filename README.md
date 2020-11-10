@@ -32,8 +32,12 @@ See live: https://tclist.best
 
 ## Tests
 
-TODO
+`$ lein test`
 
 ## Deploy
 
-TODO
+Use it in Docker container. Simple `docker-compose.yml` is provide to run with docker compose.
+
+So, in the basic case just have docker and docker-compose installed and run `$ docker-compose up -d`.
+
+In more complex cases, build your own docker-compose files based on the provided one.
