@@ -3,7 +3,5 @@ services:
   tc-recommended-clojure:
     container_name: tc-recommended-clojure
     build: .
-    networks:
-      - traefik_traefik-network
     ports:
       - "7888:7888"
